@@ -33,7 +33,7 @@ public class BaseballElimination {
         c = new Object[numTeams];
 
         for (int i = 0; i < numTeams; i++) {
-            String[] line = in.readLine().split(" +");
+            String[] line = in.readLine().trim().split(" +");
             t[i] = line[0];
             w[i] = Integer.parseInt(line[1]);
             l[i] = Integer.parseInt(line[2]);
@@ -65,8 +65,7 @@ public class BaseballElimination {
             for (int i = 0; i < numTeams; i++) {
                 if (this.e[i]) continue;
 
-                int numMatchups = factorial(numTeams - 1) / (factorial(2) * factorial(
-                        numTeams - 3));
+                int numMatchups = (numTeams - 1) * (numTeams - 2) / 2;
                 int numVerts = 2 + numTeams - 1 + numMatchups;
                 FlowNetwork network = new FlowNetwork(numVerts);
                 int vertNum = 1;
@@ -140,14 +139,6 @@ public class BaseballElimination {
                 }
             }
         }
-    }
-
-    private int factorial(int n) {
-        int fact = 1;
-        for (int i = 1; i <= n; i++) {
-            fact *= i;
-        }
-        return fact;
     }
 
     public int numberOfTeams() {
